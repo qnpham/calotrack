@@ -1,0 +1,23 @@
+type CalorieCardProps = {
+  meals: number;
+  calories: number;
+};
+
+export default function CalorieCard({ meals, calories }: CalorieCardProps) {
+  return (
+    <div className="bg-stone-900 p-4 w-48 rounded-xl mx-auto mt-8 sm:w-64 md:w-72 lg:w-80">
+      <div className="flex justify-between text-xs sm:text-sm md:text-base items-center">
+        <h1 className="text-gray-300">TODAY</h1>
+        <div className="bg-red-50 p-1 rounded-md">
+          <p className="text-black">{meals} meals</p>
+        </div>
+      </div>
+      <div className="mt-2 flex items-baseline">
+        <h1 className="text-xl sm:text-2xl md:text-3xl mr-2">{calories}</h1>
+        <p className="text-xs sm:text-sm md:text-base text-gray-300">
+          calories
+        </p>
+      </div>
+    </div>
+  );
+}
