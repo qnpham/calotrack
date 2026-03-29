@@ -29,11 +29,9 @@ export default function PhotoUpload() {
     }
   }
 
-  function setMacros() {}
-
   return (
     <div>
-      <div className="flex place-content-around mt-12">
+      <div className="flex place-content-around mt-8">
         <input
           type="file"
           accept="image/*"
@@ -67,7 +65,7 @@ export default function PhotoUpload() {
       <div className="flex justify-center mt-8">
         <input
           type="text"
-          placeholder="chicken and rice"
+          placeholder="chicken, rice, 3 eggs"
           className="bg-neutral-800 text-white rounded-sm p-1 w-48 border border-neutral-600 mr-3
 "
         />
