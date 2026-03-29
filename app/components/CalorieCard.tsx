@@ -5,7 +5,7 @@ type CalorieCardProps = {
 
 export default function CalorieCard({ meals, calories }: CalorieCardProps) {
   return (
-    <div className="bg-stone-900 p-4 w-48 rounded-xl mx-auto mt-8 sm:w-64 md:w-72 lg:w-80">
+    <div className="bg-stone-900 p-4 w-48 rounded-xl mx-auto mt-4 sm:w-64 md:w-72 lg:w-80">
       <div className="flex justify-between text-xs sm:text-sm md:text-base items-center">
         <h1 className="text-gray-400">TODAY</h1>
         <div className="bg-white p-1 rounded-md">
