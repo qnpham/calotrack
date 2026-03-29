@@ -8,8 +8,8 @@ export default function MacroCard({
   fat,
 }: Nutrition) {
   return (
-    <div>
-      <div className="bg-neutral-800 w-80 mx-auto outline-1 outline-neutral-500">
+    <div className="mt-8 sm:mt-12 md:mt-16">
+      <div className="bg-neutral-800 w-80 mx-auto outline-1 outline-neutral-500 ">
         <div className="flex justify-between bg-neutral-900 p-4">
           <div>
             <span className="font-semibold">{name}</span>
@@ -34,8 +34,8 @@ export default function MacroCard({
           </div>
         </div>
       </div>
-      <div className="mt-6 flex justify-center">
-        <button className="border-1 p-1 bg-white text-black rounded-md">
+      <div className="mt-6 sm:mt-12 md:mt-16 flex justify-center">
+        <button className="border-1 p-2 bg-white text-black rounded-full">
           TRACK
         </button>
       </div>

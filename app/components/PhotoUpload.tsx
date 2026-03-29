@@ -31,7 +31,7 @@ export default function PhotoUpload() {
 
   return (
     <div>
-      <div className="flex place-content-around mt-8">
+      <div className="flex justify-center gap-4 mt-8 sm:mt-12 md:mt-16">
         <input
           type="file"
           accept="image/*"
@@ -41,13 +41,13 @@ export default function PhotoUpload() {
         />
         <button
           onClick={handleUpload}
-          className="bg-red-50 text-black rounded-lg p-2"
+          className="bg-gray-700 text-white rounded-full py-2 px-4 "
         >
           Upload file
         </button>
         <button
           onClick={handleCamera}
-          className="bg-red-50 text-black rounded-lg p-2"
+          className="bg-white text-black rounded-full p-2 px-4"
         >
           Take photo
         </button>
@@ -57,12 +57,16 @@ export default function PhotoUpload() {
 "
       ></h1>
       {imageUrl ? (
-        <img src={imageUrl} alt="placeholder" className="w-80 mx-auto mt-8" />
+        <img
+          src={imageUrl}
+          alt="placeholder"
+          className="w-80 mx-auto mt-8 sm:mt-12 md:mt-16"
+        />
       ) : (
-        <PlaceHolderIcon className="w-80 mx-auto mt-8 text-gray-400 outline-4 rounded-md" />
+        <PlaceHolderIcon className="w-80 mx-auto mt-8 text-gray-400 outline-4 rounded-md md:mt-16" />
       )}
 
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 sm:mt-12 md:mt-16">
         <input
           type="text"
           placeholder="chicken, rice, 3 eggs"
@@ -70,7 +74,7 @@ export default function PhotoUpload() {
 "
         />
         <button
-          className="bg-white text-black p-1 rounded-md
+          className="bg-white text-black p-2 rounded-full
 "
         >
           Analyze
