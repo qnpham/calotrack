@@ -1,11 +1,15 @@
 import CalorieCard from "./components/CalorieCard";
 import PhotoUpload from "./components/PhotoUpload";
 import MacroCard from "./components/MacroCard";
+import CalendarDays from "../public/CalendarDays.svg";
 
 export default function Home() {
   return (
     <div className="container mx-auto">
-      <CalorieCard meals={2} calories={1242} />
+      <div className="flex justify-between px-4 items-center">
+        <CalorieCard meals={2} calories={1242} />
+        <CalendarDays className="w-18" />
+      </div>
       <PhotoUpload />
       <div className="mt-8">
         <MacroCard

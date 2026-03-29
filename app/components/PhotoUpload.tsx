@@ -1,7 +1,7 @@
 "use client";
+import PlaceHolderIcon from "../../public/placeholder.svg";
 
 import { useRef, useState } from "react";
-import PlaceHolderIcon from "../../public/placeholder.svg";
 export default function PhotoUpload() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
