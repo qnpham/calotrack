@@ -5,10 +5,10 @@ import CalendarDays from "../public/CalendarDays.svg";
 
 export default function Home() {
   return (
-    <div className="container mx-auto max-w-lg">
+    <div className="container mx-auto max-w-lg mt-4 sm:mt-12">
       <div className="flex justify-between items-center gap-4 px-4">
         <CalorieCard meals={2} calories={1242} />
-        <CalendarDays className="w-20 border-2 rounded-xl" />
+        <CalendarDays className="w-20 border-2 rounded-xl  hover:cursor-pointer" />
       </div>
       <PhotoUpload />
 

@@ -41,13 +41,13 @@ export default function PhotoUpload() {
         />
         <button
           onClick={handleUpload}
-          className="bg-gray-700 text-white rounded-full py-2 px-4 "
+          className="bg-gray-700 text-white rounded-full py-2 px-4 hover:cursor-pointer"
         >
           Upload file
         </button>
         <button
           onClick={handleCamera}
-          className="bg-white text-black rounded-full p-2 px-4"
+          className="bg-white text-black rounded-full p-2 px-4 hover:cursor-pointer"
         >
           Take photo
         </button>
@@ -74,7 +74,7 @@ export default function PhotoUpload() {
 "
         />
         <button
-          className="bg-white text-black p-2 rounded-full
+          className="bg-white text-black p-2 rounded-full hover:cursor-pointer
 "
         >
           Analyze

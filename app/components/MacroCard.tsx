@@ -35,7 +35,7 @@ export default function MacroCard({
         </div>
       </div>
       <div className="mt-6 sm:mt-12 md:mt-16 flex justify-center">
-        <button className="border-1 p-2 bg-white text-black rounded-full">
+        <button className="border-1 p-2 bg-white text-black rounded-full hover:cursor-pointer">
           TRACK
         </button>
       </div>
