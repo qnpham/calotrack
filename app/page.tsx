@@ -8,7 +8,7 @@ export default function Home() {
     <div className="container mx-auto max-w-lg">
       <div className="flex justify-between items-center gap-4 px-4">
         <CalorieCard meals={2} calories={1242} />
-        <CalendarDays className="w-18" />
+        <CalendarDays className="w-20 border-2 rounded-xl" />
       </div>
       <PhotoUpload />
 
