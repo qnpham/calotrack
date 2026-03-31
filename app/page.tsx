@@ -1,24 +1,15 @@
-import CalorieCard from "./components/CalorieCard";
-import PhotoUpload from "./components/PhotoUpload";
 import MacroCard from "./components/MacroCard";
 import CalendarDays from "../public/CalendarDays.svg";
 
 export default function Home() {
   return (
-    <div className="container mx-auto max-w-lg mt-4 sm:mt-12">
-      <div className="flex justify-between items-center gap-4 px-4">
-        <CalorieCard meals={2} calories={1242} />
-        <CalendarDays className="w-20 border-2 rounded-xl  hover:cursor-pointer" />
+    <div className="container max-w-lg mx-auto px-6">
+      <div className="flex justify-between mt-8">
+        <p className="text-sm text-neutral-500">TODAY</p>
+        <div className="w-9 h-9 border border-neutral-800 rounded-lg flex items-center justify-center cursor-pointer">
+          <CalendarDays className="w-5 h-5 text-neutral-500" />
+        </div>
       </div>
-      <PhotoUpload />
-
-      <MacroCard
-        name={"chicken and eggs"}
-        protein={90}
-        calories={900}
-        carbs={120}
-        fat={50}
-      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 import { Nutrition } from "@/types/nutrition";
 import ArrowLeft from "../../public/ArrowLeft.svg";
+import MacroCard from "../components/MacroCard";
 
 export default function DayPage() {
   const meals: Nutrition[] = [
@@ -64,31 +65,7 @@ export default function DayPage() {
       <h1 className="text-sm text-neutral-500 mt-6">MEALS</h1>
       <div className="flex flex-col gap-4 mt-4">
         {meals.map((meal, index) => {
-          return (
-            <div className="bg-neutral-900 px-5 rounded-xl" key={index}>
-              <div className="flex justify-between py-3 border-b border-neutral-700">
-                <h1 className="font-semibold">Oatmeal & banana</h1>
-                <div>
-                  <span className="font-semibold mr-1">420</span>
-                  <span className="text-sm text-neutral-500">kcal</span>
-                </div>
-              </div>
-              <div className="flex justify-between py-3">
-                <div className="flex flex-col items-center flex-1">
-                  <h1 className="font-semibold">{meal.protein}g</h1>
-                  <p className="text-xs text-neutral-500">protein</p>
-                </div>
-                <div className="flex flex-col items-center border-x border-neutral-700 flex-1">
-                  <h1 className="font-semibold">{meal.carbs}g</h1>
-                  <p className="text-xs text-neutral-500">carbs</p>
-                </div>
-                <div className="flex flex-col items-center flex-1">
-                  <h1 className="font-semibold">{meal.fat}g</h1>
-                  <p className="text-xs text-neutral-500">fat</p>
-                </div>
-              </div>
-            </div>
-          );
+          return <MacroCard {...meal} key={index} />;
         })}
       </div>
     </div>
