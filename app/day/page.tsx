@@ -1,6 +1,6 @@
 "use client";
 import { Nutrition } from "@/types/nutrition";
-import ArrowLeft from "../../public/ArrowLeft.svg";
+import { ArrowLeft } from "lucide-react";
 import MacroCard from "../components/MacroCard";
 
 export default function DayPage() {
