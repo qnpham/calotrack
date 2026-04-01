@@ -1,9 +1,21 @@
 "use client";
 import { Nutrition } from "@/types/nutrition";
 import { ArrowLeft } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import MacroCard from "../components/MacroCard";
+import Link from "next/link";
 
 export default function DayPage() {
+  const searchParams = useSearchParams();
+  const dateParam = searchParams.get("date");
+  const date = dateParam ? new Date(dateParam) : new Date();
+
+  const formattedDate = date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
   const meals: Nutrition[] = [
     {
       name: "chicken, eggs, and rice",
@@ -35,14 +47,16 @@ export default function DayPage() {
             className="font-semibold text-2xl 
  "
           >
-            March 30, 2026
+            {formattedDate}
           </h1>
           <p className="text-sm text-neutral-500">3 meals logged</p>
         </div>
-        <div className="flex text-neutral-500">
-          <ArrowLeft className="w-4" />
-          <span className="text-sm">back</span>
-        </div>
+        <Link href={"/calendar"}>
+          <div className="flex text-neutral-500">
+            <ArrowLeft className="w-4" />
+            <span className="text-sm">back</span>
+          </div>
+        </Link>
       </div>
       <div className="flex justify-around mt-8 bg-neutral-900 py-4 rounded-xl">
         <div className="flex flex-col items-center">
