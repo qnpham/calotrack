@@ -4,10 +4,49 @@ import CalendarDays from "../public/CalendarDays.svg";
 import Camera from "../public/Camera.svg";
 import { useRef, useState } from "react";
 import Link from "next/link";
+import type { Nutrition } from "@/types/nutrition";
 
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [result, setResult] = useState<Nutrition>({
+    name: "",
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+  });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [description, setDescription] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+  const [imageBase64, setImageBase64] = useState<string | null>(null);
+
+  function descriptionChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setDescription(e.target.value);
+  }
+
+  async function handleAnalyze() {
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/analyze", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ description, imageBase64 }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+      if (error) setError(null);
+      setResult(data);
+      setIsLoading(false);
+    } catch (error) {
+      setError("Gemini is busy, please try again");
+      setIsLoading(false);
+    }
+  }
 
   function handleUpload() {
     if (inputRef.current) {
@@ -26,8 +65,17 @@ export default function Home() {
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
-      console.log(file);
+      if (file.type === "image/heic" || file.name.endsWith(".heic")) {
+        alert("HEIC files are not supported. Please use JPEG or PNG.");
+        return;
+      }
       setImageUrl(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result as string;
+        setImageBase64(base64);
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -104,19 +152,28 @@ export default function Home() {
         <input
           className="border flex-2  bg-neutral-900 border-neutral-800 rounded-lg px-2"
           type="text"
-          placeholder="chicken, rice, and eggs"
+          placeholder="Describe your food (optional)"
+          onChange={descriptionChange}
+          value={description}
         />
-        <button className="flex-1 border border-neutral-800 rounded-lg p-1">
-          Analyze
+        <button
+          className="flex-1 border border-neutral-800 rounded-lg p-1"
+          onClick={handleAnalyze}
+          disabled={isLoading}
+        >
+          {isLoading ? "Analyzing..." : "Analyze"}
         </button>
       </div>
+      {error && (
+        <p className="text-red-400 text-sm text-center mt-6">{error}</p>
+      )}
       <div className="mt-8">
         <MacroCard
-          name={"slice of pizza"}
-          protein={90}
-          calories={350}
-          carbs={100}
-          fat={90}
+          name={result.name}
+          protein={result.protein}
+          calories={result.calories}
+          carbs={result.carbs}
+          fat={result.fat}
         />
       </div>
       <div className="flex justify-center mt-8">
