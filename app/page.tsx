@@ -5,6 +5,9 @@ import Camera from "../public/Camera.svg";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import type { Nutrition } from "@/types/nutrition";
+import { LogOut } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -20,6 +23,7 @@ export default function Home() {
   const [description, setDescription] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [imageBase64, setImageBase64] = useState<string | null>(null);
+  const router = useRouter();
 
   function descriptionChange(e: React.ChangeEvent<HTMLInputElement>) {
     setDescription(e.target.value);
@@ -79,14 +83,27 @@ export default function Home() {
     }
   }
 
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    router.push("/login");
+  }
+
   return (
     <div className="container max-w-lg mx-auto px-6">
       <div className="flex justify-between mt-8">
         <p className="text-sm text-neutral-500">TODAY</p>
-        <div className="w-9 h-9 border border-neutral-800 rounded-lg flex items-center justify-center cursor-pointer">
-          <Link href="/calendar">
-            <CalendarDays className="w-5 h-5 text-neutral-500" />
-          </Link>
+        <div className="flex gap-2">
+          <div className="w-9 h-9 border border-neutral-800 rounded-lg flex items-center justify-center cursor-pointer">
+            <Link href="/calendar">
+              <CalendarDays className="w-5 h-5 text-neutral-500" />
+            </Link>
+          </div>
+          <div
+            className="w-9 h-9 border border-neutral-800 rounded-lg flex items-center justify-center cursor-pointer"
+            onClick={handleSignOut}
+          >
+            <LogOut className="w-5 h-5 text-neutral-500" />
+          </div>
         </div>
       </div>
       <div>
