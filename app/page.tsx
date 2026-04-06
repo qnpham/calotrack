@@ -66,6 +66,24 @@ export default function Home() {
     }
   }
 
+  async function handleTrack() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const userId = session?.user?.id;
+    const { error } = await supabase.from("meals").insert({
+      user_id: userId,
+      name: result.name,
+      calories: result.calories,
+      protein: result.protein,
+      carbs: result.carbs,
+      fat: result.fat,
+      date: new Date().toISOString().split("T")[0],
+    });
+    if (error) console.error(error);
+    alert("tracked!");
+  }
+
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
@@ -194,7 +212,10 @@ export default function Home() {
         />
       </div>
       <div className="flex justify-center mt-8">
-        <button className="border border-neutral-800 rounded-lg p-2 px-4 mx-auto">
+        <button
+          className="border border-neutral-800 rounded-lg p-2 px-4 mx-auto"
+          onClick={handleTrack}
+        >
           Track
         </button>
       </div>
