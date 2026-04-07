@@ -67,9 +67,8 @@ export default function Home() {
   }
 
   async function handleTrack() {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    const response = await supabase.auth.getSession();
+    const session = response.data.session;
     const userId = session?.user?.id;
     const { error } = await supabase.from("meals").insert({
       user_id: userId,

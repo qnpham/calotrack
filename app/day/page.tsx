@@ -4,11 +4,14 @@ import { ArrowLeft } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import MacroCard from "../components/MacroCard";
 import Link from "next/link";
+import { supabase } from "@/lib/supabase";
+import { useEffect, useState } from "react";
 
 export default function DayPage() {
   const searchParams = useSearchParams();
   const dateParam = searchParams.get("date");
   const date = dateParam ? new Date(dateParam) : new Date();
+  const [meals, setMeals] = useState<Nutrition[]>([]);
 
   const formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
@@ -16,29 +19,21 @@ export default function DayPage() {
     year: "numeric",
   });
 
-  const meals: Nutrition[] = [
-    {
-      name: "chicken, eggs, and rice",
-      protein: 120,
-      calories: 700,
-      carbs: 90,
-      fat: 100,
-    },
-    {
-      name: "4 tacos",
-      protein: 120,
-      calories: 800,
-      carbs: 100,
-      fat: 40,
-    },
-    {
-      name: "pho",
-      protein: 50,
-      calories: 800,
-      carbs: 60,
-      fat: 50,
-    },
-  ];
+  useEffect(() => {
+    async function handleFetch() {
+      const response = await supabase.auth.getSession();
+      const session = response.data.session;
+      const userId = session?.user?.id;
+      const { data, error } = await supabase
+        .from("meals")
+        .select("*")
+        .eq("user_id", userId)
+        .eq("date", dateParam);
+      if (data) setMeals(data);
+    }
+    handleFetch();
+  }, []);
+
   return (
     <div className="container max-w-lg mx-auto px-6">
       <div className="flex justify-between items-center mt-12">
